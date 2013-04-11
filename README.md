@@ -2,10 +2,10 @@ basic-express
 -------------
 
 
-# Set up key-pair
+### Set up key-pair
 
-# Basic server node.js
+### Basic server node.js
 
-# Express, static pages in jade
+### Express, static pages in jade
 
-# User and session handling
+### User and session handling
