@@ -1,6 +1,23 @@
 basic-express
 -------------
 
+### Getting going
+Download latest node and npm from nodejs.org
+
+Clone this repo
+
+    git clone git@github.com:kormart/basic-express.git
+    cd basic-express
+    
+Install modules (will use package.json)
+
+    npm install 
+
+Run it!
+
+    node basic-express
+    
+Test it: Browse to localhost:3000/users
 
 ### Set up key-pair
 https://help.github.com/articles/generating-ssh-keys
