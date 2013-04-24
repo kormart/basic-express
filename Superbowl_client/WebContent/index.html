@@ -44,27 +44,41 @@
      #add_tab{cursor: pointer;}
 </style>
 
-<script id="scriptInit" type="text/javascript">
-        $(document).ready(function () {
-            $("#wijgrid").wijgrid({
-                allowSorting: true,
-                allowPaging: true,
-                pageSize: 10,
-                data: [
-                    ['Adams', 'Eric', '111-222-333', 500],
-                    ['Boucher', 'David', '222-333-444', 2000],
-                    ['Cooke', 'Christopher', '333-444-555', 1500],
-                    ['Dahl', 'Burt', '444-555-666', 1000],
-                    ['Eriksson', 'Anders', '555-666-777', 0], 
-                ],
-                columns: [
-                    { headerText: "Last Name" },
-                    { headerText: "First Name" },
-                    { headerText: "Phone #" },
-                    { headerText: "Data (MB)" }
-                ]
-            });
+<script type="text/javascript">
+         
+<!-- Create a view model to define the data and behavior of the UI-->
+       function Person(data) {
+    	  var self = this;
+    	  self.FirstName = ko.observable(data.FirstName);
+    	  self.LastName = ko.observable(data.LastName);
+    	  self.Phone = ko.observable(data.Phone);
+    	  self.DataPlan = ko.observable(data.DataPlan);
+    	  self.QoS = ko.observable(data.QoS);
+       };
+   
+       var viewModel = {
+              data: ko.observableArray([
+                  new Person({ FirstName: "Adam", LastName: "Dahl", Phone: "333-333", DataPlan: "500", QoS: 2 }),
+                  new Person({ FirstName: "Burt", LastName: "Chaplin", Phone: "222-222", DataPlan:  "1500", QoS: 2 }),
+                  new Person({ FirstName: "Ceasar", LastName: "Brooke", Phone: "111-111", DataPlan: "1000", QoS: 2 }),
+                  new Person({ FirstName: "David", LastName: "Andersson", Phone: "444-444", DataPlan:  "2000", QoS: 3 })
+              ])
+        };
+   
+ <!-- Bind to the ViewModel and activate knockout.js -->
+       $(document).ready(function () {
+           ko.applyBindings(viewModel, $(".container").get(0));
         });
+   
+        function addRow() {
+           var len = viewModel.data().length;
+           viewModel.data.push(new Person({ FirstName: "Person" + len, LastName: "Personson" + len, Phone: "N/A",  DataPlan: "0", QoS: "1" }));
+        };
+        
+        function Total() {
+            var len = viewModel.data().length;
+            return len
+         };
     </script>
 </head>
 
@@ -82,10 +96,20 @@
      </ul>
      
      <div id="TabEmployees">
-		<!--Create the grid -->
-     	<table id="wijgrid">
-     	</table>
-     </div>
+     	<!--Create a button for users to click to dynamically add rows -->
+     	<input type="button" id="btnAddRow" onclick="addRow()" value="Add Employee" />
+     	 Employees: <b data-bind="text: Total()">&nbsp;</b>
+     	 		
+     	<!--Create the grid -->
+     	<table id="dataGrid" data-bind="wijgrid: { data: data, 
+     											allowEditing: true, 
+     											allowPaging: true,
+   												pageSize: 10,
+   												allowSorting: true }">
+     	</table> 
+ 
+     	  
+     	</div>
      
      <div id="TabServices">
       	<p>This is the services available</p> 
