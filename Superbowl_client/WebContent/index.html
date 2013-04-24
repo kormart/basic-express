@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Index</title>
+<!--jQuery References-->
+<script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js" type="text/javascript"></script>
+ 
+<!--Theme-->
+<link href="http://cdn.wijmo.com/themes/aristo/jquery-wijmo.css" rel="stylesheet" type="text/css" />
+ 
+<!--Wijmo Widgets CSS-->
+<link href="http://cdn.wijmo.com/jquery.wijmo-pro.all.3.20131.1.min.css" rel="stylesheet" type="text/css" />
+ 
+<!--Wijmo Widgets JavaScript-->
+<script src="http://cdn.wijmo.com/jquery.wijmo-open.all.3.20131.1.min.js" type="text/javascript"></script>
+<script src="http://cdn.wijmo.com/jquery.wijmo-pro.all.3.20131.1.min.js" type="text/javascript"></script>
+
+<!--Wijmo Knockout Integration Library-->
+<script src="http://cdn.wijmo.com/interop/knockout.wijmo.3.20131.1.js" type="text/javascript"></script>
+
+<!--Knockout Library-->
+<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js" type="text/javascript"></script>
+
+<!-- KnockoutJS for MVVM-->
+    <script type="text/javascript" src="http://cdn.wijmo.com/external/knockout.wijmo.js"></script>
+    
+<script type="text/javascript">
+     $(function () {
+          $("#MainTabs").wijtabs({
+            sortable: true,
+            alignment: 'top'
+            });
+     });
+</script>
+
+<style type="text/css">
+     #dialog label, #dialog input{display: block;}
+     #dialog label{margin-top: 0.5em;}
+     #dialog input, #dialog textarea{width: 95%;}
+     #tabs{margin-top: 1em;}
+     #tabs li .ui-icon-close{float: left; margin: 0.4em 0.2em 0 0; cursor: pointer;}
+     #add_tab{cursor: pointer;}
+</style>
+
+<script id="scriptInit" type="text/javascript">
+        $(document).ready(function () {
+            $("#wijgrid").wijgrid({
+                allowSorting: true,
+                allowPaging: true,
+                pageSize: 10,
+                data: [
+                    ['Adams', 'Eric', '111-222-333', 500],
+                    ['Boucher', 'David', '222-333-444', 2000],
+                    ['Cooke', 'Christopher', '333-444-555', 1500],
+                    ['Dahl', 'Burt', '444-555-666', 1000],
+                    ['Eriksson', 'Anders', '555-666-777', 0], 
+                ],
+                columns: [
+                    { headerText: "Last Name" },
+                    { headerText: "First Name" },
+                    { headerText: "Phone #" },
+                    { headerText: "Data (MB)" }
+                ]
+            });
+        });
+    </script>
+</head>
+
+
+
+
+
+
+
+<body>
+<div id="MainTabs">
+     <ul>
+     	<li><a href="#TabEmployees">Employees</a> </li>
+      	<li><a href="#TabServices">Services</a> </li>
+     </ul>
+     
+     <div id="TabEmployees">
+		<!--Create the grid -->
+     	<table id="wijgrid">
+     	</table>
+     </div>
+     
+     <div id="TabServices">
+      	<p>This is the services available</p> 
+     </div>
+</div>
+</body>
+</html>
