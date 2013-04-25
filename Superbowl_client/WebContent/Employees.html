@@ -1,0 +1,30 @@
+<div data-role="appviewpage" data-title="List of Employees">
+    <div data-role="content">
+        <script type="text/javascript">
+        $("#demo-remote").wijgrid({
+            data: new wijdatasource({
+                proxy: new wijhttpproxy({
+                	//URL to get a list of names, will be switched with our server later
+                    url: "http://ws.geonames.org/searchJSON",
+                    dataType: "jsonp",
+                    data: {
+                        featureClass: "P",
+                        style: "full",
+                        maxRows: 5,
+                        name_startsWith: "ab"
+                    },
+                    key: "geonames"
+                }),
+                reader: new wijarrayreader([
+                    { name: "label", mapping: function (item) { return item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName } },
+                    { name: "name", mapping: "name" },
+                    { name: "countryCode", mapping: "countryCode" },
+                    { name: "continentCode", mapping: "continentCode" }
+                ])
+            }) 
+        }); 
+    </script>
+            <table id="demo-remote">
+            </table> 
+     </div>
+</div>
