@@ -1,21 +1,24 @@
 {
 
   "frank": {
-    "username": "frank",
-    "name": "Frank Sinatra",
-    "bio": "Singer"
-  },
-
-  "jobim": {
-    "username": "jobim",
-    "name": "Antonio Carlos Jobim",
-    "bio": "Composer"
+    "name": "frank",
+    "service": "box",
+    "policy": "1",
+	"usage": "100"
   },
 
   "fred": {
-    "username": "fred",
-    "name": "Fred Astaire",
-    "bio": "Dancer and Actor"
+    "name": "fred",
+    "service": "box",
+    "policy": "1",
+	"usage": "200"
+  },
+
+  "fred": {
+    "name": "fred",
+    "service": "voip",
+    "policy": "2",
+	"usage": "300"
   }
 
 }
