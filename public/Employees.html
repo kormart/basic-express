@@ -1,0 +1,35 @@
+<div data-role="appviewpage" data-title="List of Employees">
+    <div data-role="content">
+        <script type="text/javascript">
+        $("#demo-remote").wijgrid({
+            data: new wijdatasource({
+                proxy: new wijhttpproxy({
+                	//URL to get a list of names, will be switched with our server later
+                    url: "http://ec2-23-22-150-152.compute-1.amazonaws.com:3000/data",
+                    dataType: "json",
+                    data: {
+                       // featureClass: "P",
+                        //style: "full",
+                        maxRows: 5,
+                        //name_startsWith: "f"
+                    },
+                    //key: "geonames"
+                }),
+                reader: new wijarrayreader([
+                     { name: "Name", mapping: "Product_Name" },
+                     { name: "English Name", mapping: "English_Name" },
+                     { name: "Quantity", mapping: "Quantity_Per_Unit" },
+                     { name: "Discontinued", mapping: "Discontinued" }
+                    
+                    //{ name: "Name", mapping: "name" },
+                    //{ name: "Service", mapping: "service" },
+                    //{ name: "Policy", mapping: "policy" },
+                    //{ name: "Usage", mapping: "usage" }
+                ])
+            }) 
+        }); 
+    </script>
+            <table id="demo-remote">
+            </table> 
+     </div>
+</div>

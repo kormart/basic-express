@@ -5,6 +5,7 @@ var express = require('express');
 var app = module.exports = express();
 //var User = require('./data/models/user');
 var users = require('./data/users');
+var users2 = require('./data/users_copy2');
 var index = 0;
 var length = 10;
 
@@ -58,6 +59,24 @@ app.get('/data', function(req, res, next){
 		res.end();	  
 //      });
 //  });
+});
+
+app.get('/data2', function(req, res, next){
+    res.write(JSON.stringify(users2) + "\n");
+	res.end();	  
+});
+
+app.get('/App', function(req, res) {
+  res.sendfile(__dirname + '/public/App.html');
+});
+app.get('/Employees', function(req, res) {
+  res.sendfile(__dirname + '/public/Employees.html');
+});
+app.get('/Services', function(req, res) {
+  res.sendfile(__dirname + '/public/Services.html');
+});
+app.get('/Employees2', function(req, res) {
+  res.sendfile(__dirname + '/public/Employees2.html');
 });
 
 

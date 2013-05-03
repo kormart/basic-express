@@ -1,0 +1,88 @@
+<div data-role="appviewpage" data-title="List of Employees">
+    <div data-role="content">
+    
+
+ <script id="scriptInit" type="text/javascript">
+        $.support.cors = true;
+        var viewModel;
+ 
+        function ViewModel(sessionId) {
+            var productView = new wijmo.data.AjaxDataView("http://ec2-23-22-150-152.compute-1.amazonaws.com:3000/data2", {
+                pageSize: 10,
+                ajax: { crossOrigin: true }
+            });
+            productView.refresh();
+ 
+            this.products = productView;
+ 
+            this.sortId = function () {
+                productView.sort("Product_ID");
+            };
+            this.sortPrice = function () {
+                productView.sort("Unit_Price desc, Product_Name");
+            };
+            this.clearPaging = function () {
+                productView.pageSize(0);
+            };
+            this.setPaging = function () {
+                productView.pageSize(10);
+            };
+            this.prevPage = function () {
+                productView.prevPage();
+            };
+            this.nextPage = function () {
+                productView.nextPage();
+            };
+        }
+        
+            $(document).ready(function () {
+                viewModel = new ViewModel();
+                ko.applyBindings(viewModel, $(".container").get(0));
+            });
+       
+    </script>
+
+
+<div class="container">
+    <div class="header">
+        <h2>List of employees</h2>
+    </div>
+    <div class="main demo">
+        <!-- Begin demo markup 
+        <table>
+            <tr>
+                <th>Sort</th>
+                <td>
+                    <button data-bind="click:sortId">ID</button>
+                    <button data-bind="click:sortPrice">Price, Name</button>
+                </td>
+            </tr>
+            <tr>
+                <th>Pages</th>
+                <td>
+                    <button data-bind="click:clearPaging">pageSize = 0</button>
+                    <button data-bind="click:setPaging">pageSize = 10</button>
+                    <button data-bind="click:prevPage">prev</button>
+                    <button data-bind="click:nextPage">next</button>
+                </td>
+            </tr>
+        </table> -->
+ 
+        <!--<h3>Products. page #<span data-bind='text: products.pageIndex() + 1'></span>/<span data-bind='text: products.totalPages()'></span></h3>-->
+ 
+        <table id="demo-grid" data-bind="wijgrid: { data: products, allowEditing: false, showFilter: false, columns: [
+            { headerText: 'Name', dataKey: 'name' },
+            { headerText: 'Service', dataKey: 'service' },
+            { headerText: 'Policy', dataKey: 'policy' },
+            { headerText: 'Usage', dataKey: 'usage' }
+            ]}" >
+        </table>       
+         
+    </div>   
+</div>
+    
+    
+    
+     
+     </div>
+</div>
