@@ -1,0 +1,30 @@
+<div data-role="appviewpage" data-title="List of Employees">
+    <div data-role="content">
+        <script type="text/javascript">
+        $("#demo-remote").wijgrid({
+            data: new wijdatasource({
+                proxy: new wijhttpproxy({
+                	//URL to get a list of names, will be switched with our server later
+                    url: "http://search.twitter.com/search.json?q=blue%20angels",
+                    dataType: "json",
+                    data: {
+                        //featureClass: "P",
+                        //style: "full",
+                        maxRows: 5,
+                        //name_startsWith: "f"
+                    },
+                    //key: "geonames"
+                }),
+                reader: new wijarrayreader([
+                    { name: "Name", mapping: "max_id" },
+                    { name: "English Name", mapping: "query" },
+                    { name: "Quantity", mapping: "from_user_id" },
+                    { name: "Discontinued", mapping: "from_user_name" }
+                ])
+            }) 
+        }); 
+    </script>
+            <table id="demo-remote">
+            </table> 
+     </div>
+</div>
