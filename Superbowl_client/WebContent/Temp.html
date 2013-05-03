@@ -5,7 +5,7 @@
             data: new wijdatasource({
                 proxy: new wijhttpproxy({
                 	//URL to get a list of names, will be switched with our server later
-                    url: "http://search.twitter.com/search.json?q=blue%20angels",
+                    url: "http://demo.componentone.com/aspnet/NorthwindAPI/api/read/Product",
                     dataType: "json",
                     data: {
                         //featureClass: "P",
@@ -16,10 +16,10 @@
                     //key: "geonames"
                 }),
                 reader: new wijarrayreader([
-                    { name: "Name", mapping: "max_id" },
-                    { name: "English Name", mapping: "query" },
-                    { name: "Quantity", mapping: "from_user_id" },
-                    { name: "Discontinued", mapping: "from_user_name" }
+                    { name: "Name", mapping: "Product_Name" },
+                    { name: "English Name", mapping: "English_Name" },
+                    { name: "Quantity", mapping: "Quantity_Per_Unit" },
+                    { name: "Discontinued", mapping: "Discontinued" }
                 ])
             }) 
         }); 
