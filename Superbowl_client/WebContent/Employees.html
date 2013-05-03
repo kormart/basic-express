@@ -5,21 +5,26 @@
             data: new wijdatasource({
                 proxy: new wijhttpproxy({
                 	//URL to get a list of names, will be switched with our server later
-                    url: "http://ws.geonames.org/searchJSON",
-                    dataType: "jsonp",
+                    url: "http://ec2-23-22-150-152.compute-1.amazonaws.com:3000/data",
+                    dataType: "json",
                     data: {
-                        featureClass: "P",
-                        style: "full",
+                       // featureClass: "P",
+                        //style: "full",
                         maxRows: 5,
-                        name_startsWith: "ab"
+                        //name_startsWith: "f"
                     },
                     key: "geonames"
                 }),
                 reader: new wijarrayreader([
-                    { name: "label", mapping: function (item) { return item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName } },
-                    { name: "name", mapping: "name" },
-                    { name: "countryCode", mapping: "countryCode" },
-                    { name: "continentCode", mapping: "continentCode" }
+                     { name: "Name", mapping: "Product_Name" },
+                     { name: "English Name", mapping: "English_Name" },
+                     { name: "Quantity", mapping: "Quantity_Per_Unit" },
+                     { name: "Discontinued", mapping: "Discontinued" }
+                    
+                    //{ name: "Name", mapping: "name" },
+                    //{ name: "Service", mapping: "service" },
+                    //{ name: "Policy", mapping: "policy" },
+                    //{ name: "Usage", mapping: "usage" }
                 ])
             }) 
         }); 

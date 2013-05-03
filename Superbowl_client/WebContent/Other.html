@@ -1,6 +1,30 @@
-<div data-role="appviewpage" data-title="Other smart stuff to have">
+<div data-role="appviewpage" data-title="List of Employees">
     <div data-role="content">
-        <p>Kanoodle fling dabba hum cringle nizzle zangle zap flooble. Blobbing quabbleblong. JINGLE LING RAZZLESHNIZZLE, "ZOOM DUH DEE GOBLIN," BAM BOBA FETT WOGGLE INGLE NIP SHNAZZLE-WOW...QUIBBLE DUH HUM! Duh izzle shnoz nizzle BLEE loo whack. "Bam shnizzle boo?" hizzle Cartman.</p>
-        <p>Blippity Fling-Flang compliments of <a href="http://bff.orangehairedboy.com/">orange haired boy</a>.</p>
-    </div>
+        <script type="text/javascript">
+        $("#demo-remote").wijgrid({
+            data: new wijdatasource({
+                proxy: new wijhttpproxy({
+                	//URL to get a list of names, will be switched with our server later
+                    url: "http://demo.componentone.com/aspnet/NorthwindAPI/api/read/Product",
+                    dataType: "json",
+                    data: {
+                        //featureClass: "P",
+                        //style: "full",
+                        maxRows: 5,
+                        //name_startsWith: "f"
+                    },
+                    //key: "geonames"
+                }),
+                reader: new wijarrayreader([
+                    { name: "Name", mapping: "Product_Name" },
+                    { name: "English Name", mapping: "English_Name" },
+                    { name: "Quantity", mapping: "Quantity_Per_Unit" },
+                    { name: "Discontinued", mapping: "Discontinued" }
+                ])
+            }) 
+        }); 
+    </script>
+            <table id="demo-remote">
+            </table> 
+     </div>
 </div>

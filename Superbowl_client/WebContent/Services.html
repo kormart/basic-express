@@ -1,29 +1,30 @@
-<div data-role="appviewpage" data-title="List of services">
+<div data-role="appviewpage" data-title="List of Employees">
     <div data-role="content">
-        <script id="scriptInit" type="text/javascript">
-        $(document).ready(function () {
-            $("#wijgrid").wijgrid({
-                allowSorting: true,
-                allowPaging: true,
-                pageSize: 3,
-                data: [
-                    [27, 'Canada', 'Adams, Craig', 'RW'],
-                    [43, 'Canada', 'Boucher, Philippe', 'D', 'R'],
-                    [24, 'Canada', 'Cooke, Matt', 'LW', 'L'],
-                    [87, 'Canada', 'Crosby, Sidney (C)', 'C', 'L'],
-                    [1, 'United States', 'Curry, John', 'G', 'L'], 
-                ],
-                columns: [
-                    { headerText: "Number" },
-                    { headerText: "Nationality" },
-                    { headerText: "Player" },
-                    { headerText: "Position" }
-                ]
-            });
-        });
+        <script type="text/javascript">
+        $("#demo-remote").wijgrid({
+            data: new wijdatasource({
+                proxy: new wijhttpproxy({
+                	//URL to get a list of names, will be switched with our server later
+                    url: "http://ws.geonames.org/searchJSON",
+                    dataType: "jsonp",
+                    data: {
+                        featureClass: "P",
+                        style: "full",
+                        maxRows: 5,
+                        name_startsWith: "f"
+                    },
+                    key: "geonames"
+                }),
+                reader: new wijarrayreader([
+                    { name: "Label", mapping: function (item) { return item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName } },
+                    { name: "Naaaame", mapping: "name" },
+                    { name: "Country Code", mapping: "countryCode" },
+                    { name: "Continent Code", mapping: "continentCode" }
+                ])
+            }) 
+        }); 
     </script>
-     <!--Create the grid -->
-     <table id="wijgrid">
-     </table>
-    </div>
+            <table id="demo-remote">
+            </table> 
+     </div>
 </div>
