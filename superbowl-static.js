@@ -1,5 +1,5 @@
-var express = require('express')
-  , routes = require('./routes');
+var express = require('express');
+//  , routes = require('./routes');
 //var dbURL = 'mongodb://localhost/database';
 //var db = require('mongoose').connect(dbURL);
 var app = module.exports = express();
@@ -53,7 +53,9 @@ app.get('/data', function(req, res, next){
 //        if (err) {
 //          return next(err);
 //        }
-        res.render('data', {title: 'Data', users: users});	  
+//        res.render('data', {title: 'Superbowl Static', users: users});	  
+        res.write(JSON.stringify(users) + "\n");
+		res.end();	  
 //      });
 //  });
 });
