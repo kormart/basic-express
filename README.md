@@ -37,3 +37,14 @@ Code pieces online: http://www.wrox.com/WileyCDA/WroxTitle/Professional-Node-js-
 ### Express, static pages in jade
 
 ### User and session handling
+
+### Mongo database on Amazon
+http://media.amazonwebservices.com/AWS_NoSQL_MongoDB.pdf
+Attach EBS volume, for example to /dev/sdf
+
+    sudo mkfs -t ext4 /dev/sdf
+    sudo mkdir -p /data/db/
+    sudo chown `id -u` /data/db
+    sudo chown 664 /etc/fstab    
+    sudo echo ‘/dev/sdf /data/db auto noatime,noexec,nodiratime 0 0’ >> /etc/fstab
+    
