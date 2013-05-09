@@ -61,23 +61,42 @@ app.get('/data', function(req, res, next){
 //  });
 });
 
+
+app.post('/data2', function(req, res) {
+//  console.log(req.body);
+
+if (users2[req.body.name]) {
+    res.send('Conflict', 409);
+  } else {
+//    users2[req.body.name] = req.body;
+      users2 = users2.concat(req.body);
+      res.redirect('/App');
+      console.log( res.redirect('/App') )
+//      res.end('it worked!')
+  }
+
+});
+
+
 app.get('/data2', function(req, res, next){
     res.write(JSON.stringify(users2) + "\n");
-	res.end();	  
+	res.end();
+// console.log('hämtade ny data till från data2!');
 });
+
 
 app.get('/App', function(req, res) {
   res.sendfile(__dirname + '/public/App.html');
 });
-app.get('/Employees', function(req, res) {
-  res.sendfile(__dirname + '/public/Employees.html');
-});
-app.get('/Services', function(req, res) {
-  res.sendfile(__dirname + '/public/Services.html');
-});
-app.get('/Employees2', function(req, res) {
-  res.sendfile(__dirname + '/public/Employees2.html');
-});
+//app.get('/Employees', function(req, res) {
+//  res.sendfile(__dirname + '/public/Employees.html');
+//});
+//app.get('/Services', function(req, res) {
+//  res.sendfile(__dirname + '/public/Services.html');
+//});
+//app.get('/Employees2', function(req, res) {
+//  res.sendfile(__dirname + '/public/Employees2.html');
+//});
 
 
 app.listen(3000, function(){

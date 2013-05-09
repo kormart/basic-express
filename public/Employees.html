@@ -1,35 +1,52 @@
-<div data-role="appviewpage" data-title="Food menu">
+<div data-role="appviewpage" data-title="List of Employees">
     <div data-role="content">
-        <script type="text/javascript">
-        $("#demo-remote").wijgrid({
-            data: new wijdatasource({
-                proxy: new wijhttpproxy({
-                	//URL to get a list of names, will be switched with our server later
-                    url: "http://ec2-23-22-150-152.compute-1.amazonaws.com:3000/data",
-                    dataType: "json",
-                    data: {
-                       // featureClass: "P",
-                        //style: "full",
-                        maxRows: 5,
-                        //name_startsWith: "f"
-                    },
-                    //key: "geonames"
-                }),
-                reader: new wijarrayreader([
-                     { name: "Name", mapping: "Product_Name" },
-                     { name: "English Name", mapping: "English_Name" },
-                     { name: "Quantity", mapping: "Quantity_Per_Unit" },
-                     { name: "Discontinued", mapping: "Discontinued" }
-                    
-                    //{ name: "Name", mapping: "name" },
-                    //{ name: "Service", mapping: "service" },
-                    //{ name: "Policy", mapping: "policy" },
-                    //{ name: "Usage", mapping: "usage" }
-                ])
-            }) 
-        }); 
-    </script>
-            <table id="demo-remote">
-            </table> 
+    
+
+ <script id="scriptInit" type="text/javascript">
+        $.support.cors = true;
+        var viewModel;
+ 
+        function ViewModel(sessionId) {
+            var productView = new wijmo.data.AjaxDataView("http://localhost:3000/data2", {
+                pageSize: 10,
+                ajax: { crossOrigin: true }
+            });
+            productView.refresh();
+ 
+            this.products = productView;
+ 
+            
+        }
+        
+            $(document).ready(function () {
+                viewModel = new ViewModel();
+                ko.applyBindings(viewModel, $(".container").get(0));
+            });
+       
+  </script>
+
+
+<div class="container">
+    <div class="header">
+        <h2>Employees:</h2>
+    </div>
+    <div class="main demo">
+        <!-- Begin demo markup -->
+  
+ 
+        <!--<h3>Products. page #<span data-bind='text: products.pageIndex() + 1'></span>/<span data-bind='text: products.totalPages()'></span></h3>-->
+ 
+        <table id="demo-grid" data-bind="wijgrid: { data: products, allowEditing: false, showFilter: true, columns: [
+            { headerText: 'Name', dataKey: 'name' },
+            { headerText: 'Service', dataKey: 'service' },
+            { headerText: 'Policy', dataKey: 'policy' },
+            { headerText: 'Usage', dataKey: 'usage' }
+            ]}" >
+        </table>      
+         
+    </div>   
+</div>
+
+     
      </div>
 </div>
