@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width" />
+<title>Insert title here</title>
+
+<!--jQuery References-->
+<script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js" type="text/javascript"></script>
+<!--  
+<script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js" type="text/javascript"></script>
+-->
+  
+
+<!--Wijmo Widgets CSS-->
+<link href="http://cdn.wijmo.com/jquery.wijmo-pro.all.3.20131.3.min.css" rel="stylesheet" type="text/css" />
+  
+<!--Theme-->
+<link href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" rel="stylesheet" type="text/css" />
+    
+<!--Wijmo Widgets JavaScript-->
+<script src="http://cdn.wijmo.com/jquery.wijmo-open.all.3.20131.3.min.js" type="text/javascript"></script>
+<script src="http://cdn.wijmo.com/jquery.wijmo-pro.all.3.20131.3.min.js" type="text/javascript"></script>
+
+<!--Knockout Library-->
+<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.0.js" type="text/javascript"></script>
+
+<!--Wijmo Knockout Integration Library-->
+<script src="http://cdn.wijmo.com/interop/knockout.wijmo.3.20131.3.js" type="text/javascript"></script>
+
+ <script src="http://cdn.wijmo.com/wijmo/wijmo.data.ajax.js" type="text/javascript"></script>
+
+
+
+
+</head>
+<body>
+<div data-role="page" data-theme="b">
+    <div data-role="wijappview">
+        <div data-role="appviewpage">
+            <div data-role="header" data-position="fixed">
+                <h2>Superbowl UI</h2>
+            </div>
+            
+            
+            <div data-role="content">
+                
+                <script id="scriptInit" type="text/javascript">
+    $(document).ready(function () {
+        $("#wijbarchart").wijbarchart({
+        	header: {
+                text: "Usage of Services" },
+        	clusterOverlap: 50,
+            data: {x: ['Frank', 'Fred', 'Paul', 'Tom', 'Louie', 'Ella']},
+            horizontal: false,
+            axis:{
+                y:{annoFormatString:"p0"}
+            },
+            chartLabelFormatString: "p0",
+            hint:{
+                content: function(){
+                    return this.data.label + '\n ' +  Globalize.format(this.y, "p0") + '';
+                }
+            },
+            seriesList: [{
+                label: "Service1 data usage",
+                legendEntry: true,
+                data: { y: [.05, .04, .21, .27, .1, .24] }
+            },
+           {
+                label: "Service 2 data usage",
+                legendEntry: true,
+                data: { y: [.37, .19, .12, .06, .17, .27] }
+            },
+            {
+                label: "Service 3 data usage",
+                legendEntry: true,
+                data: { y: [.07, .29, .22, .156, .07, .17] }
+            }],
+        });
+    });
+</script>
+    
+    
+<script id="scriptInit" type="text/javascript">       
+        $(document).ready(function () {
+            $("#wijpiechart").wijpiechart({
+                radius: 100,
+                legend: { visible: true },
+                hint: {
+                    content: function () {
+                        return this.data.label + " : " + Globalize.format(this.value / this.total, "p2");
+                    }
+                },
+                header: {
+                        text: "QoS by Users" },
+                seriesList: [{
+                    label: "Grade 5",
+                    legendEntry: true, data: 2.78,
+                    offset: 1
+            },
+                {
+                    label: "Grade 4",
+                    legendEntry: true,
+                    data: 7.18,
+                    offset: 1
+                },
+                {
+                    label: "Grade 3",
+                    legendEntry: true,
+                    data: 15.25,
+                    offset: 1
+                },
+                {
+                    label: "Grade 2",
+                    legendEntry: true,
+                    data: 20.41,
+                    offset: 1
+                },
+                    {
+                    label: "Grade 1",
+                    legendEntry: true,
+                    data: 33.44,
+                    offset: 1
+                }],
+                seriesStyles: [{
+                    fill: "270-rgb(12,133,240)-rgb(128,19,128)", stroke: "rgb(122,122,122)", "stroke-width": 1.5
+                }, {
+                    fill: "180-rgb(143,51,140)-rgb(33,130,13)", stroke: "rgb(122,122,122)", "stroke-width": 1.5
+                }, {
+                    fill: "270-rgb(8,34,201)-rgb(196,98,172)", stroke: "rgb(122,122,122)", "stroke-width": 1.5
+                }, {
+                    fill: "270-rgb(11,125,25)-rgb(6,6,125)", stroke: "rgb(122,122,122)", "stroke-width": 1.5
+                }, {
+                    fill: "180-rgb(63,15,77)-rgb(12,159,250)", stroke: "rgb(122,122,122)", "stroke-width": 1.5
+            }]
+            });
+ 
+        });
+    </script>    
+    
+    <div id="wijbarchart" class="ui-widget ui-widget-content ui-corner-all" style="width: 400px;
+height: 300px">
+</div>
+    
+<div id="wijpiechart" class="ui-widget ui-widget-content ui-corner-all" style="width: 400px;
+height: 300px"></div>   
+           
+ First page of the app, will not be shown on small screens (like smartphones).
+           
+            </div>
+        </div>
+        <div data-role="menu" class="ui-body-a">
+            <ul data-role="listview" data-theme="a">
+                <li><a href="Employees.html">Employees</a></li>
+                <li><a href="Services.html">Services</a></li>
+                <li><a href="SendForm.html">Send Data (form)</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
