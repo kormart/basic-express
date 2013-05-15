@@ -2,51 +2,31 @@
     <div data-role="content">
     
 
- <script id="scriptInit" type="text/javascript">
-        $.support.cors = true;
-        var viewModel;
- 
-        function ViewModel(sessionId) {
-            var productView = new wijmo.data.AjaxDataView("http://localhost:3000/data2", {
+
+<script id="employeeGrid" type="text/javascript">
+
+$.get("http://localhost:3000/data2",
+   function(data) {
+var employeeList = [];
+for (var i = 0, len = data.length; i < len; i++) {
+    var result = data[i];
+    employeeList.push({ name: result.name, service: result.service, policy: result.policy, usage: result.usage });
+    }
+
+ $("#wijgrid").wijgrid({
+                allowSorting: true,
+                allowPaging: true,
                 pageSize: 10,
-                ajax: { crossOrigin: true }
+                data: employeeList
             });
-            productView.refresh();
- 
-            this.products = productView;
- 
-            
-        }
-        
-            $(document).ready(function () {
-                viewModel = new ViewModel();
-                ko.applyBindings(viewModel, $(".container").get(0));
-            });
-       
-  </script>
+
+}, "json");
 
 
-<div class="container">
-    <div class="header">
-        <h2>Employees:</h2>
-    </div>
-    <div class="main demo">
-        <!-- Begin demo markup -->
-  
- 
-        <!--<h3>Products. page #<span data-bind='text: products.pageIndex() + 1'></span>/<span data-bind='text: products.totalPages()'></span></h3>-->
- 
-        <table id="demo-grid" data-bind="wijgrid: { data: products, allowEditing: false, showFilter: true, columns: [
-            { headerText: 'Name', dataKey: 'name' },
-            { headerText: 'Service', dataKey: 'service' },
-            { headerText: 'Policy', dataKey: 'policy' },
-            { headerText: 'Usage', dataKey: 'usage' }
-            ]}" >
-        </table>      
-         
-    </div>   
-</div>
+</script>
 
-     
+     <table id="wijgrid">
+     </table>
+
      </div>
 </div>
