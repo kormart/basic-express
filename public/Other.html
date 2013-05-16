@@ -1,23 +1,107 @@
 <div data-role="appviewpage" data-title="List of Employees">
     <div data-role="content">
 
-
-      <script id="chartscript" type="text/javascript">
-var nameList;
-var usageList;
+<script id="chartscript" type="text/javascript">
+      //  $.support.cors = true;
+    // var employees = $.get("http://localhost:3000/data2");
+function makeArrayOf(value, length) {
+  var arr = [], i = length;
+  while (i--) {
+    arr[i] = value;
+  }
+  return arr;
+}
 
 $.get("http://localhost:3000/data2",
-       function(data) {nameList = [],usageList = [];
+       function(data) {
+
+var fullList = [];
+var nameUsage = [];
+var barNameList = [];
+var usageList = [];
+var barChartList = {};
+var barServiceList = [];
+var serviceFlag = 0;
 for (var i = 0, len = data.length; i < len; i++) {
     var result = data[i];
-    nameList.push(result.name);
+    fullList.push({ name: result.name, service: result.service, policy: result.policy, usage: result.usage });
+    nameUsage.push({ name: result.name, usage: result.usage });
     usageList.push(result.usage);
-    }
 
-$("#wijbarchart").wijbarchart({
+    if (barServiceList.indexOf(result.service) == -1) //NEW SERVICE
+     {
+       if (barNameList.indexOf(result.name) == -1) //NEW SERVICE, NEW NAME
+        {  
+            barServiceList.push(result.service);
+            barNameList.push(result.name);
+            barChartList[result.service] = {};
+            barChartList[result.service].label = result.service;
+            barChartList[result.service].legendEntry = true;
+            barChartList[result.service].data = {y : []};
+            barChartList[result.service].data.y = makeArrayOf(0, barNameList.length -1);
+            
+
+            var x=0;
+            var txt="";
+            for (x in barChartList)
+            {
+            barChartList[x].data.y.push(0);
+            }
+        
+            barChartList[result.service].data.y[barNameList.indexOf(result.name)] = result.usage;
+
+        }         
+        else //NEW SERVICE, OLD NAME
+        {
+            barServiceList.push(result.service);
+            barChartList[result.service] = {};
+            barChartList[result.service].label = result.service;
+            barChartList[result.service].legendEntry = true;
+            barChartList[result.service].data = {y : []};
+            barChartList[result.service].data.y = makeArrayOf(0, barNameList.length);  
+
+            barChartList[result.service].data.y[barNameList.indexOf(result.name)] = result.usage;
+          
+        }
+     }
+     else //OLD SERVICE
+     {
+      if (barNameList.indexOf(result.name) == -1) //OLD SERVICE, NEW NAME        
+        { 
+            barNameList.push(result.name);
+
+            var x=0;
+            var txt="";
+            for (x in barChartList)
+            {
+            barChartList[x].data.y.push(0);
+            }
+        
+            barChartList[result.service].data.y[barNameList.indexOf(result.name)] = result.usage;
+        }
+        else //OLD SERVICE, OLD NAME
+        {
+        
+            barChartList[result.service].data.y[barNameList.indexOf(result.name)] = result.usage;
+ 
+        }
+     }
+
+}// END OF FOR LOOP
+
+var barChartListArray = [];
+var barChartNameList = {x : barNameList};
+var x=0;
+var txt="";
+for (x in barChartList)
+{
+barChartListArray.push(barChartList[x]);
+}
+
+$("#barchart1").wijbarchart({
                 axis: {
                     y: {
-                        text: "Usage (MB)"
+                        text: "Used Data (MB)"
                     },
                     x: {
                         text: ""
@@ -25,19 +109,14 @@ $("#wijbarchart").wijbarchart({
                 },
                 hint: {
                     content: function () {
-                        return this.data.label + '\n ' + this.y + '';
+                        return this.x + '\n ' + this.y + '';
                     }
                 },
                 header: {
-                    text: "Employee's data usage"
+                    text: "Service usage"
                 },
-                seriesList: [{
-                    label: "May",
-                    legendEntry: true,
-                    data:
-                          { x: nameList,
-                            y: usageList }
-                }],
+                data : barChartNameList,
+                seriesList: barChartListArray,
                 seriesStyles: [{
                     fill: "#8ede43", stroke: "#7fc73c", opacity: 0.8
                 }],
@@ -50,12 +129,16 @@ $("#wijbarchart").wijbarchart({
 
 </script>
 
+<div class="container">
+    <div class="header">
+    </div>
+    <div class="main demo">
+        <!-- Begin demo markup -->
 
-
-           <div id="wijbarchart" class="ui-widget ui-widget-content
+     <div id="barchart1" class="ui-widget ui-widget-content
        ui-corner-all" style="width: 400px; height: 300px">
-</div>
-
+     </div>
+</div>   
 
      
      </div>
