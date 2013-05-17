@@ -1,48 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width" />
-<title>Insert title here</title>
-
-<!--jQuery References-->
-<script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
-<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js" type="text/javascript"></script>
-<!--  
-<script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js" type="text/javascript"></script>
--->
-  
-
-<!--Wijmo Widgets CSS-->
-<link href="http://cdn.wijmo.com/jquery.wijmo-pro.all.3.20131.3.min.css" rel="stylesheet" type="text/css" />
-  
-<!--Theme-->
-<link href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" rel="stylesheet" type="text/css" />
-    
-<!--Wijmo Widgets JavaScript-->
-<script src="http://cdn.wijmo.com/jquery.wijmo-open.all.3.20131.3.min.js" type="text/javascript"></script>
-<script src="http://cdn.wijmo.com/jquery.wijmo-pro.all.3.20131.3.min.js" type="text/javascript"></script>
-
-<!--Knockout Library-->
-<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.0.js" type="text/javascript"></script>
-
-<!--Wijmo Knockout Integration Library-->
-<script src="http://cdn.wijmo.com/interop/knockout.wijmo.3.20131.3.js" type="text/javascript"></script>
-
-<script src="http://cdn.wijmo.com/wijmo/wijmo.data.ajax.js" type="text/javascript"></script>
-
-
-
-
-</head>
-<body>
-
-
+<div data-role="appviewpage" data-title="List of Employees">
+    <div data-role="content">
 
 <script id="chartscript" type="text/javascript">
-      //  $.support.cors = true;
-    // var employees = $.get("http://localhost:3000/data2");
 function makeArrayOf(value, length) {
   var arr = [], i = length;
   while (i--) {
@@ -219,11 +178,12 @@ for (x in piePolicyOccurance)
 var pieChartStyle1 = [{
                     fill: "180-rgb(195,255,0)-rgb(175,229,0)", stroke: "rgb(175,229,0)", "stroke-width": 1.5
                 }, {
-                    fill: "90-rgb(142,222,67)-rgb(127,199,60)", stroke: "rgb(127,199,60)", "stroke-width": 1.5
+                    fill: "90-rgb(70,106,133)-rgb(62,95,119)", stroke: "rgb(62,95,119)", "stroke-width": 1.5
                 }, {
                     fill: "90-rgb(106,171,167)-rgb(95,153,150)", stroke: "rgb(95,153,150)", "stroke-width": 1.5
                 }, {
-                    fill: "90-rgb(70,106,133)-rgb(62,95,119)", stroke: "rgb(62,95,119)", "stroke-width": 1.5
+                    fill: "90-rgb(142,222,67)-rgb(127,199,60)", stroke: "rgb(127,199,60)", "stroke-width": 1.5
+
                 }, {
                     fill: "90-rgb(166,166,166)-rgb(149,149,149)", stroke: "rgb(149,149,149)", "stroke-width": 1.5
                 }];
@@ -302,29 +262,19 @@ $("#piePolUse").wijpiechart({
 }, "json");
 
 
+
 </script>
-
-
-
-
-     
-<!--
-<div id="myResults">hejhej</div>
--->
 
 <div class="container">
     <div class="header">
     </div>
     <div class="main demo">
         <!-- Begin demo markup -->
-<!--
-      <table id="wijgrid">
-     </table>
--->
+
      <div id="barchart1" class="ui-widget ui-widget-content
        ui-corner-all" style="width: 400px; height: 300px">
-</div>
-
+     </div>
+</div>   
 <div id="pieServUse" class="ui-widget ui-widget-content
   ui-corner-all"></div>
 
@@ -333,12 +283,6 @@ $("#piePolUse").wijpiechart({
 
 <div id="piePolUse" class="ui-widget ui-widget-content
   ui-corner-all"></div>
-
-	
-    </div>   
+     
+     </div>
 </div>
-
-
-
-</body>
-</html>
